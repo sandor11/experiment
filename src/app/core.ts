@@ -1,5 +1,7 @@
 // here is where you decide that your core application will work off commands, queries and results...
-export interface Action {}
+export interface Action {
+    type: string;
+}
 export interface Command extends Action {}
 export interface Query extends Action {}
 
