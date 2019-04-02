@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const say_hello_1 = require("../app/say-hello");
 const parseGreeting = (request) => ({
-    greeting: "composable world!"
+    greeting: "Hello..." // this would normlly be pulled off the request header, or post params etc...
 });
 const expressController = (handler, parse) => (req, res) => {
     try {
@@ -20,6 +20,7 @@ const expressController = (handler, parse) => (req, res) => {
 exports.configureControllers = (controller) => {
     return {
         hello: {
+            // this could be module or some other grouping
             sayHello: expressController(say_hello_1.sayHelloHandler(new say_hello_1.InMemoryHelloRepository()), parseGreeting) // ExpressController<Greeting>
         }
     };

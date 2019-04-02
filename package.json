@@ -1,6 +1,6 @@
 {
   "name": "@liftango/experiment",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "dist/server.js",
   "dependencies": {
@@ -14,7 +14,7 @@
     "typescript": "^3.3.4000"
   },
   "scripts": {
-    "start": "npm run build && npm run serve",
+    "start": "npm run serve",
     "serve": "node dist/server.js",
     "build": "rm -rf ./dist && npm run tslint && npm run build-ts",
     "tslint": "tslint -c tslint.json -p tsconfig.json",

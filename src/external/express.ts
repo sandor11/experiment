@@ -1,20 +1,30 @@
 import express = require("express");
 import { Action, Handler, Result } from "../app/core";
-import { Greeting, sayHelloHandler, InMemoryHelloRepository } from "../app/say-hello";
+import {
+  Greeting,
+  sayHelloHandler,
+  InMemoryHelloRepository
+} from "../app/say-hello";
 
 // we need a way to parse the input from the outside world, into your Greeting type
 type ExpressRequestParser<T> = (request: express.Request) => T;
 const parseGreeting: ExpressRequestParser<Greeting> = (
-  request: Express.Request
+  request: express.Request
 ): Greeting => ({
-  greeting: "composable world!"
+  greeting: "Hello..." // this would normlly be pulled off the request header, or post params etc...
 });
 
 // now we can start to handle this a bit more generically
 // we now need something to take a handler and also know how to parse the input
 // and hand it off to the handler
-type ExpressController<T> = (handler: Handler<T>, parse: ExpressRequestParser<T>) => (req: express.Request, res: express.Response) => void;
-const expressController: ExpressController<Action> = (handler, parse) => (req, res) => {
+type ExpressController<T> = (
+  handler: Handler<T>,
+  parse: ExpressRequestParser<T>
+) => (req: express.Request, res: express.Response) => void;
+const expressController: ExpressController<Action> = (handler, parse) => (
+  req,
+  res
+) => {
   try {
     const result: Result = handler(parse(req));
     res.status(200).send(result);
@@ -29,8 +39,12 @@ const expressController: ExpressController<Action> = (handler, parse) => (req, r
 
 export const configureControllers = (controller: ExpressController<Action>) => {
   return {
-    hello: { // this could be module or some other grouping
-      sayHello: expressController(sayHelloHandler(new InMemoryHelloRepository()), parseGreeting) // ExpressController<Greeting>
+    hello: {
+      // this could be module or some other grouping
+      sayHello: expressController(
+        sayHelloHandler(new InMemoryHelloRepository()),
+        parseGreeting
+      ) // ExpressController<Greeting>
     }
   };
 };
