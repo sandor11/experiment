@@ -1,4 +1,5 @@
-import { Command, Handler, Success } from "../lib/core";
+import { Command, Handler, Success } from "../app/core";
+import { Greeter } from "../lib/hello";
 
 export interface Greeting extends Command {
   greeting: string;
@@ -9,12 +10,12 @@ export interface Hello extends Success {
 }
 
 export interface HelloRepository {
-  findGreeting(): string;
+  findGreeting(extra: string): Greeter;
 }
 
 export class InMemoryHelloRepository implements HelloRepository {
-  findGreeting() {
-    return "yolo db";
+  findGreeting(extra: string) {
+    return new Greeter(extra);
   }
 }
 
@@ -22,9 +23,9 @@ export const sayHelloUseCase = (
   repo: HelloRepository,
   command: Greeting
 ): Hello => {
-  const greeting = repo.findGreeting();
+  const greeter: Greeter = repo.findGreeting(command.greeting);
   return {
-    hello: [greeting, command.greeting].join(", ")
+    hello: greeter.talk()
   };
 };
 

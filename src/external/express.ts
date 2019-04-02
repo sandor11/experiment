@@ -1,5 +1,5 @@
 import express = require("express");
-import { Action, Handler, Result } from "../lib/core";
+import { Action, Handler, Result } from "../app/core";
 import { Greeting, sayHelloHandler, InMemoryHelloRepository } from "../app/say-hello";
 
 // we need a way to parse the input from the outside world, into your Greeting type

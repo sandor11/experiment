@@ -1,24 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class InMemoryHelloRepository {
-    findGreeting() {
-        return "yolo db";
-    }
-}
-exports.sayHelloUseCase = (repo, command) => {
-    const greeting = repo.findGreeting();
-    return {
-        hello: [greeting, command.greeting].join(", ")
-    };
-};
-// this is the thing that you are trying to get to...
-// at this point, you can write all your apps tests if you have these handlers
-// this is where your business domain starts
-// you have sais, hey, if you give me an action (of type Greeting)
-// I will give you back a result (of type Hello)
-//
-// however, this needs to be plugged in to the outside world in order to be useful.
-exports.sayHelloHandler = (repo) => (action) => exports.sayHelloUseCase(repo, action); // note the possibility of passing this repository in
+const say_hello_1 = require("../app/say-hello");
 const parseGreeting = (request) => ({
     greeting: "composable world!"
 });
@@ -38,7 +20,7 @@ const expressController = (handler, parse) => (req, res) => {
 exports.configureControllers = (controller) => {
     return {
         hello: {
-            sayHello: expressController(exports.sayHelloHandler(new InMemoryHelloRepository()), parseGreeting) // ExpressController<Greeting>
+            sayHello: expressController(say_hello_1.sayHelloHandler(new say_hello_1.InMemoryHelloRepository()), parseGreeting) // ExpressController<Greeting>
         }
     };
 };
@@ -49,4 +31,4 @@ const controllers = exports.configureControllers(expressController); // this cal
 exports.configureRoutes = (app) => {
     app.get("/", controllers.hello.sayHello);
 };
-//# sourceMappingURL=core.js.map
+//# sourceMappingURL=express.js.map

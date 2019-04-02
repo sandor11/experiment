@@ -16,10 +16,10 @@
   "scripts": {
     "start": "npm run build && npm run serve",
     "serve": "node dist/server.js",
-    "build": "npm run tslint && npm run build-ts",
+    "build": "rm -rf ./dist && npm run tslint && npm run build-ts",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "build-ts": "tsc",
-    "distribute": "rm -rf ./dist && npm run build && npm publish"
+    "distribute": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
