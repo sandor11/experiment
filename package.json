@@ -1,10 +1,8 @@
 {
-  "name": "experiment",
+  "name": "@liftango/experiment",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "author": "Sandy Agafonoff",
-  "license": "ISC",
+  "main": "dist/server.js",
   "dependencies": {
     "errorhandler": "^1.5.0",
     "express": "^4.16.4",
@@ -21,5 +19,15 @@
     "build": "npm run tslint && npm run build-ts",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "build-ts": "tsc"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandor11/experiment.git"
+  },
+  "author": "Sandy Agafonoff",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandor11/experiment/issues"
+  },
+  "homepage": "https://github.com/sandor11/experiment#readme"
 }
