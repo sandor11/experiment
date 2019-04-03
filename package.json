@@ -1,8 +1,8 @@
 {
   "name": "@liftango/experiment",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
-  "main": "lib/server.js",
+  "main": "lib/index.js",
   "dependencies": {
     "errorhandler": "^1.5.0",
     "express": "^4.16.4",
@@ -19,8 +19,7 @@
     "build": "rm -rf ./dist && npm run tslint && npm run build-ts",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "build-ts": "tsc",
-    "distribute": "npm run build && npm publish",
-    "copy-lib": "rm -rf lib && mkdir lib && cp -a ./src/* ./lib"
+    "distribute": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",

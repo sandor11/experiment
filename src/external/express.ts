@@ -1,10 +1,6 @@
 import express = require("express");
-import { Action, Handler, Result } from "../app/core";
-import {
-  Greeting,
-  sayHelloHandler,
-  InMemoryHelloRepository
-} from "../app/say-hello";
+import { Greeting, Action, Handler, Result } from "../../lib";
+import { sayHelloHandler, InMemoryHelloRepository } from "../app/say-hello";
 
 // we need a way to parse the input from the outside world, into your Greeting type
 type ExpressRequestParser<T> = (request: express.Request) => T;

@@ -1,17 +1,4 @@
-import { Command, Handler, Success } from "../app/core";
-import { Greeter } from "../lib/hello";
-
-export interface Greeting extends Command {
-  greeting: string;
-}
-
-export interface Hello extends Success {
-  hello: string;
-}
-
-export interface HelloRepository {
-  findGreeting(extra: string): Greeter;
-}
+import { Greeting, Greeter, Handler, Hello, HelloRepository } from "../../lib";
 
 export class InMemoryHelloRepository implements HelloRepository {
   findGreeting(extra: string) {
