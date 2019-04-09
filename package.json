@@ -23,7 +23,9 @@
     "build": "rm -rf ./dist && npm run tslint && npm run build-ts",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "build-ts": "tsc",
-    "distribute": "npm run build && npm publish"
+    "distribute": "npm version patch",
+    "version": "npm run build && git add -A",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
