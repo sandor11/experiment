@@ -23,7 +23,7 @@ const expressController: ExpressController = endpoint => (req, res) => {
 const routeEndpointThroughExpress = (
   app: express.Application,
   controller: ExpressController
-) => <T extends Action, R extends Result>(endpoint: Http.Endpoint<T, R>) => {
+) => (endpoint: Http.Endpoint<Action, Result>) => {
   switch (endpoint.method) {
     case "GET":
       app.get(endpoint.path, controller(endpoint));
