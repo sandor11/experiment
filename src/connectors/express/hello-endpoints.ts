@@ -28,8 +28,4 @@ const SayHello: Http.Endpoint<SayHello, Hello> = {
   response: jsonResponse(200)
 };
 
-export const endpoints = {
-  hello: {
-    sayHello: SayHello
-  }
-};
+export const helloEndpoints = [SayHello];

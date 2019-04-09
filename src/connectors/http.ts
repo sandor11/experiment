@@ -1,7 +1,7 @@
 import { Result, Action } from "../app/core";
 
 export namespace Http {
-  type Method = "GET" | "PUT" | "POST" | "DELETE" | "PATCH";
+  export type Method = "GET" | "PUT" | "POST" | "DELETE" | "PATCH";
   type Parameter = {
     name: string;
     required: boolean;

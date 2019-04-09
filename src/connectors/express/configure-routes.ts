@@ -1,6 +1,7 @@
 import express = require("express");
 import { Action, Failure, Result } from "../../app/core";
-import { endpoints } from "./endpoints";
+import { helloEndpoints } from "./hello-endpoints";
+import { rideEndpoints } from "./ride-endpoints";
 import { Http } from "../http";
 
 type ExpressController = (
@@ -19,9 +20,24 @@ const expressController: ExpressController = endpoint => (req, res) => {
   }
 };
 
+const routeEndpointThroughExpress = (
+  app: express.Application,
+  controller: ExpressController
+) => <T extends Action, R extends Result>(endpoint: Http.Endpoint<T, R>) => {
+  switch (endpoint.method) {
+    case "GET":
+      app.get(endpoint.path, controller(endpoint));
+      break;
+    case "POST":
+      app.post(endpoint.path, controller(endpoint));
+      break;
+    default:
+      app.get(endpoint.path, controller(endpoint));
+  }
+};
+
 export const configureRoutes = (app: express.Application) => {
-  app.get(
-    endpoints.hello.sayHello.path,
-    expressController(endpoints.hello.sayHello)
+  [...helloEndpoints, ...rideEndpoints].forEach(
+    routeEndpointThroughExpress(app, expressController)
   );
 };
