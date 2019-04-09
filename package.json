@@ -12,7 +12,10 @@
     "@liftango/hailer-api-test": "0.0.1",
     "@types/errorhandler": "0.0.32",
     "@types/express": "^4.16.1",
-    "typescript": "^3.3.4000"
+    "typescript": "^3.3.4000",
+    "https-proxy-agent": ">=2.2.0",
+    "cryptiles": ">=4.1.2",
+    "hoek": ">=4.2.1"
   },
   "scripts": {
     "start": "npm run serve",
