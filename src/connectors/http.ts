@@ -1,15 +1,13 @@
 import { Result, Action } from "../app/core";
 
 export namespace Http {
-  type Native = string | number | boolean | Date | undefined | null;
   type Method = "GET" | "PUT" | "POST" | "DELETE" | "PATCH";
-  export type Parameter = {
+  type Parameter = {
     name: string;
-    type: Native;
     required: boolean;
     location: "path" | "query" | "body";
   };
-  export type Headers = {
+  type Headers = {
     [header: string]: string;
   };
   export type Status = 200 | 201 | 204 | 400 | 404 | 500 | 502 | 504;
@@ -33,3 +31,13 @@ export namespace Http {
     response: (result: R) => Response<R>;
   }
 }
+
+export const jsonResponse = <T extends Result>(status: Http.Status) => (
+  result: T
+): Http.Response<T> => ({
+  statusCode: status,
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: result
+});

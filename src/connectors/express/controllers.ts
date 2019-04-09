@@ -1,9 +1,9 @@
 import express = require("express");
 import { Action, Failure, Result } from "../../app/core";
-import { configureEndpoints } from "./endpoints";
+import { endpoints } from "./endpoints";
 import { Http } from "../http";
 
-export type ExpressController = (
+type ExpressController = (
   endpoint: Http.Endpoint<Action, Result>
 ) => (req: express.Request, res: express.Response) => void;
 const expressController: ExpressController = endpoint => (req, res) => {
@@ -20,7 +20,8 @@ const expressController: ExpressController = endpoint => (req, res) => {
 };
 
 export const configureRoutes = (app: express.Application) => {
-  const endpoints = configureEndpoints(expressController);
-
-  app.get("/", endpoints.hello.sayHello);
+  app.get(
+    endpoints.hello.sayHello.path,
+    expressController(endpoints.hello.sayHello)
+  );
 };

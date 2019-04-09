@@ -1,8 +1,7 @@
 import express = require("express");
 import { SayHello, sayHelloHandler, Hello } from "../../app/say-hello";
-import { ExpressController } from "./controllers";
 import { InMemoryHelloRepository } from "../postgres/hello-repository";
-import { Http } from "../http";
+import { Http, jsonResponse } from "../http";
 
 const SayHello: Http.Endpoint<SayHello, Hello> = {
   ref: "say-hello",
@@ -16,27 +15,21 @@ const SayHello: Http.Endpoint<SayHello, Hello> = {
   params: [
     {
       name: "speech",
-      type: "string",
       required: true,
-      location: "body"
+      location: "query"
     }
   ],
-  parse: (request: express.Request): SayHello => ({
+  parse: (request: express.Request) => ({
     type: "hello.greeting",
     speech: request.query["speech"] || "couldnt find your speech",
     other: 7
   }),
   handle: sayHelloHandler(new InMemoryHelloRepository()),
-  response: result => ({
-    statusCode: 200,
-    body: result
-  })
+  response: jsonResponse(200)
 };
 
-export const configureEndpoints = (controller: ExpressController) => {
-  return {
-    hello: {
-      sayHello: controller(SayHello)
-    }
-  };
+export const endpoints = {
+  hello: {
+    sayHello: SayHello
+  }
 };
