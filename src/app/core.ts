@@ -12,4 +12,6 @@ export interface Failure extends Result {}
 
 // here is the reason you need the above. Its all well and good to have different
 // types of things, but at some point, you need a common interface
-export type Handler<T> = (action: T) => Result;
+export type Handler<T extends Command | Query, R extends Success | Failure> = (
+  action: T
+) => R;

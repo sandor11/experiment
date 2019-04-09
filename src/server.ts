@@ -3,7 +3,7 @@ import { Server } from "http";
 import express from "express";
 import bodyParser from "body-parser";
 
-import { configureRoutes } from "./external/express";
+import { configureRoutes } from "./connectors/express/controllers";
 
 // Create Express server
 const app = express();

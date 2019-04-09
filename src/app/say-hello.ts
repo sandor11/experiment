@@ -1,28 +1,26 @@
-import { Greeting, Greeter, Handler, Hello, HelloRepository } from "../../lib";
+import { Command, Success, Handler } from "./core";
+import { Greeting } from "../domain/greeting";
 
-export class InMemoryHelloRepository implements HelloRepository {
-  findGreeting(extra: string) {
-    return new Greeter(extra);
-  }
+export interface SayHello extends Command {
+  speech: string;
+  other: number;
 }
 
-export const sayHelloUseCase = (
-  repo: HelloRepository,
-  command: Greeting
-): Hello => {
-  const greeter: Greeter = repo.findGreeting(command.greeting);
+export interface Hello extends Success {
+  hello: string;
+}
+
+export interface HelloRepository {
+  findGreeting(extra: string): Greeting;
+}
+
+const sayHelloUseCase = (repo: HelloRepository, command: SayHello): Hello => {
+  const greeting: Greeting = repo.findGreeting(command.speech);
   return {
-    hello: greeter.talk()
+    hello: greeting.greet()
   };
 };
 
-// this is the thing that you are trying to get to...
-// at this point, you can write all your apps tests if you have these handlers
-// this is where your business domain starts
-// you have sais, hey, if you give me an action (of type Greeting)
-// I will give you back a result (of type Hello)
-//
-// however, this needs to be plugged in to the outside world in order to be useful.
-export const sayHelloHandler = (repo: HelloRepository): Handler<Greeting> => (
+export const sayHelloHandler = (repo: HelloRepository): Handler<SayHello, Hello> => (
   action
-): Hello => sayHelloUseCase(repo, action); // note the possibility of passing this repository in
+): Hello => sayHelloUseCase(repo, action);

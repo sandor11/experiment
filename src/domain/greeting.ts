@@ -1,8 +1,8 @@
-export class Greeter {
+export class Greeting {
   private basic: string = "yolo!";
   constructor(private extra: string) {}
 
-  talk() {
+  greet() {
     return [this.extra, this.basic].join(", ");
   }
 }
