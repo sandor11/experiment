@@ -1,4 +1,4 @@
-import { Result, Action } from "../app/core";
+import { Result, Action } from "../application/structure";
 
 export namespace Http {
   export type Method = "GET" | "PUT" | "POST" | "DELETE" | "PATCH";

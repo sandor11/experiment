@@ -1,8 +1,13 @@
-export class Greeting {
-  private basic: string = "yolo!";
-  constructor(private extra: string) {}
+// data shape and stucture
+export type Greeting = {
+  basic: string;
+  extra: string;
+};
 
-  greet() {
-    return [this.extra, this.basic].join(", ");
-  }
-}
+// define operations over data
+export type Greet = (greeting: Greeting) => string;
+export type FindGreeting = (extra: string) => Greeting;
+
+// default implementations where no IO is required
+export const greet: Greet = greeting =>
+  [greeting.extra, greeting.basic].join(", ");

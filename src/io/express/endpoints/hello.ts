@@ -1,7 +1,11 @@
 import express = require("express");
-import { SayHello, sayHelloHandler, Hello } from "../../app/say-hello";
-import { InMemoryHelloRepository } from "../postgres/hello-repository";
-import { Http, jsonResponse } from "../http";
+import {
+  SayHello,
+  sayHelloHandler,
+  Hello
+} from "../../../application/shared/say-hello";
+import { findGreeting } from "../../postgres/greeting";
+import { Http, jsonResponse } from "../../http";
 
 const SayHello: Http.Endpoint<SayHello, Hello> = {
   ref: "say-hello",
@@ -24,8 +28,8 @@ const SayHello: Http.Endpoint<SayHello, Hello> = {
     speech: request.query["speech"] || "couldnt find your speech",
     other: 7
   }),
-  handle: sayHelloHandler(new InMemoryHelloRepository()),
+  handle: sayHelloHandler(findGreeting),
   response: jsonResponse(200)
 };
 
-export const helloEndpoints = [SayHello];
+export const HelloEndpoints = [SayHello];

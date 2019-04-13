@@ -1,35 +1,32 @@
 import errorHandler from "errorhandler";
-import { Server } from "http";
 import express from "express";
 import bodyParser from "body-parser";
 
-import { configureRoutes } from "./connectors/express/configure-routes";
+import { configure } from "./io/express/configure";
 
 // Create Express server
-const app = express();
+const server = express();
 
 // Express configuration
-app.set("port", process.env.PORT || 3000);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+server.set("port", process.env.PORT || 3000);
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
 
-configureRoutes(app);
+configure(server);
 
 /**
  * Error Handler. Provides full stack - remove for production
  */
-app.use(errorHandler());
+server.use(errorHandler());
 
 /**
  * Start Express server.
  */
-const server: Server = app.listen(app.get("port"), () => {
+server.listen(server.get("port"), () => {
   console.log(
     "  App is running at http://localhost:%d in %s mode",
-    app.get("port"),
-    app.get("env")
+    server.get("port"),
+    server.get("env")
   );
   console.log("  Press CTRL-C to stop\n");
 });
-
-export default server;

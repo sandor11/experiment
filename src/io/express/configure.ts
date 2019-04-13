@@ -1,7 +1,7 @@
 import express = require("express");
-import { Action, Failure, Result } from "../../app/core";
-import { helloEndpoints } from "./hello-endpoints";
-import { rideEndpoints } from "./ride-endpoints";
+import { Action, Failure, Result } from "../../application/structure";
+import { HelloEndpoints } from "./endpoints/hello";
+import { RideEndpoints } from "./endpoints/ride";
 import { Http } from "../http";
 
 type ExpressController = (
@@ -36,8 +36,8 @@ const routeEndpointThroughExpress = (
   }
 };
 
-export const configureRoutes = (app: express.Application) => {
-  [...helloEndpoints, ...rideEndpoints].forEach(
+export const configure = (app: express.Application) => {
+  [...HelloEndpoints, ...RideEndpoints].forEach(
     routeEndpointThroughExpress(app, expressController)
   );
 };

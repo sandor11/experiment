@@ -1,14 +1,12 @@
 // here is where you decide that your core application will work off commands, queries and results...
 
-export interface Action {
-  type: string;
-}
-export interface Command extends Action {}
-export interface Query extends Action {}
+export type Action = {};
+export type Command = Action & {};
+export type Query = Action & {};
 
-export interface Result {}
-export interface Success extends Result {}
-export interface Failure extends Result {}
+export type Result = {};
+export type Success = Result & {};
+export type Failure = Result & {};
 
 // here is the reason you need the above. Its all well and good to have different
 // types of things, but at some point, you need a common interface

@@ -3,9 +3,9 @@ import {
   GetOwnerRides,
   getOwnerRidesHandler,
   GetOwnerRidesData
-} from "../../app/get-owner-rides";
-import { InMemoryRideRepository } from "../postgres/ride-repository";
-import { Http, jsonResponse } from "../http";
+} from "../../../application/shared/get-owner-rides";
+import { findRidesByOwner } from "../../postgres/ride";
+import { Http, jsonResponse } from "../../http";
 
 const GetOwnerRides: Http.Endpoint<GetOwnerRides, GetOwnerRidesData> = {
   ref: "get-ride",
@@ -27,8 +27,8 @@ const GetOwnerRides: Http.Endpoint<GetOwnerRides, GetOwnerRidesData> = {
     type: "ride.getownerrides",
     owner: request.query["owner"]
   }),
-  handle: getOwnerRidesHandler(new InMemoryRideRepository()),
+  handle: getOwnerRidesHandler(findRidesByOwner),
   response: jsonResponse(200)
 };
 
-export const rideEndpoints = [GetOwnerRides];
+export const RideEndpoints = [GetOwnerRides];
