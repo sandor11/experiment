@@ -1,0 +1,1 @@
+{"version":3,"file":"greeting-model.js","sourceRoot":"","sources":["../../../../src/io/postgres/orm/greeting-model.ts"],"names":[],"mappings":";;AAEA,iEAAiE;AACjE,oEAAoE;AACpE,gCAAgC;AAChC,MAAa,aAAa;IACxB,YAAY,CAAC,KAAa;QACxB,OAAO;YACL,KAAK,EAAE,gBAAgB;YACvB,KAAK;SACN,CAAC;IACJ,CAAC;CACF;AAPD,sCAOC"}
