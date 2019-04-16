@@ -1,10 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "es6", // https://github.com/Microsoft/TypeScript/issues/27117
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
-    "outFile": "types/index.d.ts"
+    "declarationDir": "lib",
+    "outDir": "lib",
+    "emitDeclarationOnly": true
   }
 }

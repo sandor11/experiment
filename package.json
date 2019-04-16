@@ -23,10 +23,10 @@
     "build": "rm -rf ./dist && npm run tslint && npm run build-ts",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "build-ts": "tsc",
-    "types": "rm -rf ./types && tsc --project ./tsconfig.d.json",
+    "lib": "tsc --project tsconfig.d.json",
     "distribute": "npm version patch",
     "version": "npm run build && git add -A",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
@@ -38,5 +38,5 @@
     "url": "https://github.com/sandor11/experiment/issues"
   },
   "homepage": "https://github.com/sandor11/experiment#readme",
-  "types": "types/index.d.ts"
+  "types": "lib/index.d.ts"
 }
