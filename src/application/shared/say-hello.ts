@@ -1,22 +1,17 @@
-import { Command, Success, Handler } from "../structure";
+import { Commands, Results, Handler } from "../";
 import { FindGreeting, Greeting, greet } from "../../domain/greeting";
 
-export type SayHello = Command & {
-  speech: string;
-  other: number;
-};
-
-export type Hello = Success & {
-  hello: string;
-};
-
-const sayHelloUseCase = (find: FindGreeting, command: SayHello): Hello => {
+const sayHelloUseCase = (
+  find: FindGreeting,
+  command: Commands.SayHello
+): Results.Hello => {
   const greeting: Greeting = find(command.speech);
   return {
     hello: greet(greeting)
   };
 };
 
-export const sayHelloHandler = (
+export const sayHello = (
   find: FindGreeting
-): Handler<SayHello, Hello> => (action): Hello => sayHelloUseCase(find, action);
+): Handler<Commands.SayHello, Results.Hello> => (action): Results.Hello =>
+  sayHelloUseCase(find, action);

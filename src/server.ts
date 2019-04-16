@@ -2,7 +2,7 @@ import errorHandler from "errorhandler";
 import express from "express";
 import bodyParser from "body-parser";
 
-import { configure } from "./io/express/configure";
+import { configure } from "./io/http/express/configure";
 
 // Create Express server
 const server = express();

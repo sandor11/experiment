@@ -1,25 +1,17 @@
-import { Query, Success, Handler } from "../structure";
-import { Ride, FindRidesByOwner } from "../../domain/ride";
-
-export type GetOwnerRides = Query & {
-  owner: string;
-};
-
-export type GetOwnerRidesData = Success & {
-  rides: Ride[];
-};
+import { Queries, Results, Handler } from "../";
+import { FindRidesByOwner } from "../../domain/ride";
 
 const findRideUseCase = (
   findByOwner: FindRidesByOwner,
-  command: GetOwnerRides
-): GetOwnerRidesData => {
-  const rides = findByOwner(command.owner);
+  query: Queries.GetOwnerRides
+): Results.GetOwnerRidesData => {
+  const rides = findByOwner(query.owner);
   return {
     rides
   };
 };
 
-export const getOwnerRidesHandler = (
+export const getOwnerRides = (
   findByOwner: FindRidesByOwner
-): Handler<GetOwnerRides, GetOwnerRidesData> => action =>
+): Handler<Queries.GetOwnerRides, Results.GetOwnerRidesData> => action =>
   findRideUseCase(findByOwner, action);
